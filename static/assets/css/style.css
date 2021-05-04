@@ -1,0 +1,14 @@
+.special-card {
+  background-color: rgba(245, 245, 245, 1);
+  padding:0;
+  margin:0;
+  border:0;
+  height:1.5em;
+}
+.fnt{
+  color:#ffffff;
+}
+.search{
+height:1.5em;
+width: 100;
+}

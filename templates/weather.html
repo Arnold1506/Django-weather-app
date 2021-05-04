@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  </head>
+
+
+  <body>
+  <div class="container">
+    <div class="row py-4">
+      <div class="col-lg-12">
+        <div class="card">
+          <img src="{% static 'assets/images/bghero.jpg' %}" height="500" class="card-img" alt="">
+          <div class="card-img-overlay">
+            <div class="text-center text-white">
+              <h3>Weather ForeCast</h3>
+            </div>
+            <div class="row justify-content-center mt-3 pt-5">
+              <div class="col-lg-5">
+                <div class="card search-box">
+                  <div class="card-body special-card">
+                    <form class="" action="{% url 'results' %}" method="post">
+                      {% csrf_token %}
+                      <div class="input-group mb-3">
+
+                        <input type="text" class="form-control" name="city" id="city" placeholder="Enter Location" aria-label="Username" aria-describedby="basic-addon2">
+                        <div class="input-group-prepend">
+                          <button class="input-group-text" id="basic-addon2">
+                          <i class="fas fa-search search"></i>
+
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% if name and coordinates and local_time %}
+            <div class="row justify-content-center pt-3">
+              <div class="col-lg-5 text-center text-white">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="text-center">{{ name }}</h1>
+                    <span class="mt-2 text-secondary fnt">{{ text }}</span>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-4">
+                    <p>Longitude</p>
+                    <span>{{ coordinates.longitude }}&#176;</span>
+                    </div>
+                      <div class="col-md-4">
+                        <p>Latitude</p>
+                        <span>{{ coordinates.latitude }}&#176;</span>
+                </div>
+                <div class="col-md-4">
+                  <p>Local-Time</p>
+                  <span>{{ local_time }}</span>
+                </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if wind and humidity and pressure and temp %}
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="float-right">
+                <img src="{% static 'assets/images/wind.png' %}" height="50" width="50" alt="">
+              </div>
+              <h4>
+                wind
+              </h4>
+              <p>{{ wind }}kmph</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="float-right">
+                <img src="{% static 'assets/images/temperature.jpg' %}" height="50" width="50" alt="">
+              </div>
+              <h4>
+                Temperature
+              </h4>
+              <p>{{ temp }}&#8451;</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="float-right">
+                <img src="{% static 'assets/images/humidity.png'%}" height="50" width="50" alt="">
+              </div>
+              <h4>
+                Humidity
+              </h4>
+              <p> {{ humidity }} </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="float-right">
+                <img src="{% static 'assets/images/pressure.png'%}" height="50" width="50" alt="">
+              </div>
+              <h4>
+                Pressure
+              </h4>
+              <p>{{ pressure }}&#13268;</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <script src="https://kit.fontawesome.com/bd6c243322.js" crossorigin="anonymous"></script>
+
+    <script>
+    if(window.history.replaceState){
+        window.history.replaceState(null,null,window.location.href)
+    }
+    </script>
+
+
+  </body>
+</html>
